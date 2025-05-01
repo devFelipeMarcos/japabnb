@@ -2,7 +2,7 @@ import React from "react";
 
 const Item = () => {
   return (
-    <a href="/" className="flex flex-col gap-2">
+    <a className="flex flex-col gap-2">
       <img
         src="https://a0.muscache.com/im/pictures/miso/Hosting-884714536239845882/original/5a6f7f81-2727-4961-9e84-c2d7ba9bb36a.jpeg?im_w=720"
         alt="alt"

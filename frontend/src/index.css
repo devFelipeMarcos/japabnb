@@ -3,3 +3,7 @@
 @theme {
   --color-primary-400: #ff385c;
 }
+
+button {
+  cursor: pointer;
+}

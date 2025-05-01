@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = (props) => {
+  console.log(props.user);
   return (
     <header className="shadow-md">
       {/* LOGO */}
@@ -24,7 +25,7 @@ const Header = () => {
           <p className="border-r border-r-gray-300 px-4">Qualquer Semana</p>
           <p className="px-4">Hóspedes</p>
 
-          <a className="bg-primary-400 rounded-full p-2 text-white">
+          <button className="bg-primary-400 rounded-full p-2 text-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -39,12 +40,12 @@ const Header = () => {
                 d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
               />
             </svg>
-          </a>
+          </button>
         </Link>
 
         {/* PERFIL */}
-        <Link to="/login">
-          <a className="flex items-center gap-2 rounded-full border border-gray-300 py-2 pr-4 pl-6 shadow-md">
+        <Link to={props.user ? "/account" : "/login"}>
+          <button className="flex items-center gap-2 rounded-full border border-gray-300 py-2 pr-4 pl-6 shadow-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -71,8 +72,15 @@ const Header = () => {
               />
             </svg>
 
-            <p className="max-w-20 truncate sm:max-w-32"> Felipe Marcos </p>
-          </a>
+            {props.user ? (
+              <p className="max-w-20 truncate sm:max-w-32">
+                {" "}
+                {props.user.name}{" "}
+              </p>
+            ) : (
+              <></>
+            )}
+          </button>
         </Link>
       </div>
     </header>

@@ -5,7 +5,7 @@ import { PrismaClient } from "@prisma/client";
 import UserRoutes from "./domains/users/routers.js";
 import cors from "cors";
 
-const db = new PrismaClient();
+// const db = new PrismaClient();
 
 const { PORT } = process.env;
 const app = express();

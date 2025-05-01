@@ -1,7 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Register = () => {
+const Register = ({ setUser }) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!email || !password) {
+      alert("Você precisa preencher os dois campos!");
+    }
+    try {
+      const response = await axios.post("/users/login", {
+        email,
+        password,
+      });
+
+      setUser(response.data);
+      setRedirect(true);
+    } catch (error) {
+      alert(`Deu um erro ao logar: ${error.response.data}`);
+    }
+  };
+
   return (
     <section className="flex items-center">
       <div className="mx-auto flex w-full max-w-96 flex-col items-center gap-4">

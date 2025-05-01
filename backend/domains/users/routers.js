@@ -30,6 +30,9 @@ router.get("/", async (req, res) => {
 //THIS ROUTE IS TO CREATE NEW USER
 router.post("/", async (req, res) => {
   const { email, name, password } = req.body;
+  if (!email || !name || !password) {
+    return res.status(400);
+  }
   const hashpass = await bcrypt.hash(password, 10);
 
   try {
