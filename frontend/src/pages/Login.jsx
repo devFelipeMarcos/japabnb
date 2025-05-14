@@ -22,7 +22,8 @@ const Login = ({ user, setUser }) => {
       setUser(response.data);
       setRedirect(true);
     } catch (error) {
-      alert(`Deu um erro ao logar: ${error.response.data}`);
+      console.warn(error.response.data.error);
+      alert(`Deu um erro ao logar: ${error.response.data.error}`);
     }
   };
 
