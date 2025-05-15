@@ -35,12 +35,12 @@ router.get("/profile", async (req, res) => {
   const { token } = req.cookies;
 
   if (token) {
-    try {
-      const userInfo = jwt.verify(token, SECRET_KEY);
+    const userInfo = jwt.verify(token, SECRET_KEY, {}, (error, userInfo) => {
+      if (error) throw error;
       res.json(userInfo);
-    } catch (error) {
-      res.json(null);
-    }
+    });
+  } else {
+    res.json(null);
   }
 });
 
@@ -61,9 +61,11 @@ router.post("/register", async (req, res) => {
 
     const { id } = newUser;
     const payload = { id, name, email };
-    const token = jwt.sign(payload, SECRET_KEY);
-    console.log(token);
-    res.cookie("token", token).status(200).json(newUser);
+    const TOKEN = jwt.sign(payload, SECRET_KEY, {}, (error, token) => {
+      if (error) throw error;
+
+      res.cookie("token", TOKEN).status(200).json(newUser);
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);

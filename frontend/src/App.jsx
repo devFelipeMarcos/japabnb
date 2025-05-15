@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./pages/Register";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Account from "./pages/Account";
 
 axios.defaults.baseURL = import.meta.env.VITE_AXIOS_BASE_URL;
 axios.defaults.withCredentials = true;
@@ -34,6 +35,7 @@ function App() {
         />
 
         <Route path="/register" element={<Register setUser={setUser} />} />
+        <Route path="/account/:subpage?" element={<Account user={user} />} />
       </Routes>
     </BrowserRouter>
   );
