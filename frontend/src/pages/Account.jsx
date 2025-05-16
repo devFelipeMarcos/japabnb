@@ -1,7 +1,12 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
+import AccProfile from "../components/AccProfile";
+import { UserContext } from "../contexts/UserContext";
+import { useContext } from "react";
 
 const Account = () => {
+  const { user, setUser } = useContext(UserContext);
+  if (!user) return <Navigate to="/login" />;
   const { subpage } = useParams();
 
   const buttonClass = (button) => {
@@ -15,20 +20,20 @@ const Account = () => {
   };
   return (
     <section className="p-8">
-      <div className="mx-auto flex max-w-7xl flex-col items-center gap-4">
+      <div className="mx-auto flex max-w-7xl flex-col items-center gap-8">
         <div className="flex gap-2">
-          <button className={buttonClass("profile")}>Perfil</button>
-          <button className={buttonClass("bookings")}>Reservas</button>
-          <button className={buttonClass("places")}>Lugares</button>
+          <Link to="/account/profile" className={buttonClass("profile")}>
+            Perfil
+          </Link>
+          <Link to="/account/bookings" className={buttonClass("bookings")}>
+            Reservas
+          </Link>
+          <Link to="/account/places" className={buttonClass("places")}>
+            Lugares
+          </Link>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <p>Logado como </p>
-
-          <button className="bg-primary-400 min-w-44 cursor-pointer rounded-full px-4 py-2 text-white">
-            Loggout
-          </button>
-        </div>
+        {subpage === "profile" && <AccProfile user={user} setUser={setUser} />}
       </div>
     </section>
   );

@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useUserContext } from "../contexts/UserContext";
 
-const Header = (props) => {
+const Header = () => {
+  const { user } = useUserContext();
   return (
     <header className="shadow-md">
       {/* LOGO */}
@@ -43,7 +45,7 @@ const Header = (props) => {
         </Link>
 
         {/* PERFIL */}
-        <Link to={props.user ? "/account" : "/login"}>
+        <Link to={user ? "/account/profile" : "/login"}>
           <button className="flex items-center gap-2 rounded-full border border-gray-300 py-2 pr-4 pl-6 shadow-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -71,11 +73,8 @@ const Header = (props) => {
               />
             </svg>
 
-            {props.user ? (
-              <p className="max-w-20 truncate sm:max-w-32">
-                {" "}
-                {props.user.name}{" "}
-              </p>
+            {user ? (
+              <p className="max-w-20 truncate sm:max-w-32"> {user.name} </p>
             ) : (
               <></>
             )}
