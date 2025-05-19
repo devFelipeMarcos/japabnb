@@ -3,6 +3,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import AccProfile from "../components/AccProfile";
 import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
+import AccPlaces from "../components/AccPlaces";
 
 const Account = () => {
   const { user, setUser } = useContext(UserContext);
@@ -33,7 +34,8 @@ const Account = () => {
           </Link>
         </div>
 
-        {subpage === "profile" && <AccProfile user={user} setUser={setUser} />}
+        {subpage === "profile" && <AccProfile />}
+        {subpage === "places" && <AccPlaces />}
       </div>
     </section>
   );
